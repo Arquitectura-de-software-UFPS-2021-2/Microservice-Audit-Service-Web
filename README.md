@@ -11,3 +11,10 @@ permitiendo un seguimiento de todas las creaciones, modificaciones, eliminación
 3. Un auditor podrá ver el listado de las acciones realizadas sobre algún archivo.
 4. Debe permitir al auditor filtrar los registros existentes.
 5. Eliminar auditoría de un objeto determinado.
+
+## Generar reporte de auditoría
+- Un usuario Auditor puedo generar reportes de la auditoría.
+1. Un auditor podrá generar informes.  
+2. Evaluación de procesos y cumplimiento de estándares.
+3. Señalar excepciones y destacar áreas que requieren atención.
+4. Localizar errores y posibles irregularidades.
