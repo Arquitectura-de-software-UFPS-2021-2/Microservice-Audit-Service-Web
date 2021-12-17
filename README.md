@@ -4,6 +4,8 @@ Del Proyecto Desarrollo de un Portal Educativo para el Programa de Ingeniería d
 El portal dispone de una auditoría de las acciones realizadas por los usuarios, manteniendo un historial de las operaciones ejecutadas en el sistema, 
 permitiendo un seguimiento de todas las creaciones, modificaciones, eliminación, descarga de las publicaciones y solicitudes de tutorías.
 
+El Microservicio se utiliza para la gestión de auditoría de los eventos realizados obteniendo los datos e insertando los datos de acuerdo a las acciones que realiza el usuario.
+
 ## Registro de acciones de usuarios.
 - Un usuario Auditor puedo gestionar las acciones del usuario.
 1. Realizar seguimiento de todas las modificaciones como creación, renombrado o borrado sobre los archivos publicados.
