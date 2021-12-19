@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Auditoria"/>
+<Context antiJARLoockup="true" path="/Auditoria">
+<Resource
+auth="Container"
+driverClassName="com.mysql.cj.jdbc.Driver"
+maxTotal="8"
+maxIdel="4"
+name="jdbc/pooldb"
+type="javax.sql.DataSource"
+url="jdbc:mysql://localhost:3306/sistema"
+username="root"
+password=""
+removeAbandoned="true"
+/>
+
+</Context>
