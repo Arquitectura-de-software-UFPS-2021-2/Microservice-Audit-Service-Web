@@ -1,13 +1,3 @@
-
-<%@page import="java.util.logging.Logger"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.util.logging.Level"%>
-<%@page import="org.json.JSONException"%>
-<%@page import="org.json.JSONObject"%>
-<%@page import="Auditoria.ModelDb"%>
-<%@page import="org.json.JSONArray"%>
-
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -15,28 +5,28 @@
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <title>Front Auditoria</title>
+        <style> .form-control:hover{border-color: #f2d2d6;} </style>
     </head>
     <body>
 
-        <%@ page import = "Auditoria.ServiceAuditoriums"%>     
+        <script>let objectData =<%= request.getParameter("json")%></script>  
 
-        <% ServiceAuditoriums s = new ServiceAuditoriums();%>        
-        <script>let datos=<%= s.generateSqlConvertJson() %></script>
-      
         <div class="input-group mb-3">
             <input id="buscarData" type="text" class="form-control" placeholder="Buscar  ..." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button id='btnSearch' class="btn btn-outline-info" type="button">Buscar</button>
+                <button style="background:#f2d2d6; color:black;" id='btnSearch' class="btn btn-outline-info" type="button">Buscar</button>
             </div>
         </div>
         <div id="table"></div>
 
         <script>
 
-     
             var table = new Tabulator("#table", {
+                rowFormatter: function (row) {
+                    row.getElement().style.backgroundColor = "#f2d2d6";
+                },
                 locale: true,
                 langs: {
                     "es-es": {
@@ -72,20 +62,23 @@
                         }
                     }
                 },
-                data: datos, //load row data from array
+                data: objectData, //load row data from array
                 layout: "fitColumns", //fit columns to width of table
                 responsiveLayout: "hide", //hide columns that dont fit on the table
                 tooltips: true, //show tool tips on cells
                 addRowPos: "top", //when adding a new row, add it to the top of the table
                 history: true, //allow undo and redo actions on the table
                 pagination: "local", //paginate the data
-                paginationSize: 5, //allow 5 rows per page of data
+                paginationSize: 10, //allow 5 rows per page of data
                 movableColumns: true, //allow column order to be changed
                 resizableRows: true, //allow row order to be changed
+                groupBy: "accion",
+                groupValues: [["Update", "Insert", "Delete"]],
                 initialSort: [//set the initial sort order of the data
-                    {column: "name", dir: "asc"},
+                      {column: "id", dir: "asc"},
                 ],
                 columns: [//define the table columns
+                    {rowHandle: true, formatter: "handle", headerSort: false, frozen: true, width: 30, minWidth: 30},
                     {title: "ID", field: "id"},
                     {title: "Usuario", field: "usuario"},
                     {title: "Accion", field: "accion"},
@@ -116,6 +109,8 @@
             });
 
         </script>
+
+
 
     </body>
 </html>
