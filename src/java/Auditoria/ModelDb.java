@@ -24,8 +24,7 @@ public class ModelDb {
 
         try {
 
-           // Class.forName("com.mysql.cj.jdbc.Driver");
-        Class.forName("com.mysql.jdbc.Driver");
+         Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException sql) {
             System.out.println(sql.getLocalizedMessage());
         }

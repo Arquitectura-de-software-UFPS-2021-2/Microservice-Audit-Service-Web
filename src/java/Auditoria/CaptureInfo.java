@@ -1,11 +1,16 @@
 package Auditoria;
 
-
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 public class CaptureInfo {
 
@@ -30,66 +35,55 @@ public class CaptureInfo {
         ipublica = reader.readLine();
         return ipublica;
     }
+    
+    
+        private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
 
-    public static void getJsonRequest() throws JSONException {
+    }
+        
+            public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
         try {
-            //creamos una URL donde esta nuestro webservice
-            // java.net.URL url = new java.net.URL("http://wservice.viabicing.cat/v2/stations");
-            // java.net.URL url = new java.net.URL("https://gorest.co.in/public/v1/users");
-            // java.net.URL url = new java.net.URL(" http://api.plos.org/search?q=title:DNA");
-            java.net.URL url = new java.net.URL("https://jsonplaceholder.typicode.com/users");
-            
-            
-            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
-            // indicamos por que verbo HTML ejecutaremos la solicitud
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
-            
-
-            if (conn.getResponseCode() != 200) {
-                //si la respuesta del servidor es distinta al codigo 200 lanzaremos una Exception
-                throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
-            }
-            java.io.BufferedReader br = new java.io.BufferedReader(new java.io.InputStreamReader((conn.getInputStream())));
-            //creamos un StringBuilder para almacenar la respuesta del web service
-            StringBuilder sb = new StringBuilder();
-            int cp;
-            while ((cp = br.read()) != -1) {
-                sb.append((char) cp);
-            }
-            //en la cadena output almacenamos toda la respuesta del servidor
-            String output = sb.toString();
-            //convertimos la cadena a JSON a traves de la libreria GSON
-
-            com.google.gson.JsonObject json = new com.google.gson.Gson().fromJson(output, com.google.gson.JsonObject.class);
-           
-            
-            //imprimimos como Json
-            //System.out.println("salida como JSON" + json);
-            //imprimimos como String
-            //System.out.println(output);
-
-            JSONObject objetoJson = new JSONObject(output);
-
-            //objetoJson.getJSONObject("meta").getJSONObject("pagination").getJSONObject("total");
-            // Acceder a cada objeto en las posiciones 
-            System.out.println(output);
- 
-  
-            //objetoJson.getJSONObject("pagination");
-            conn.disconnect();
-        } catch (IOException | RuntimeException e) {
-            System.out.println("Err "+e.getMessage());
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject(jsonText);
+            return json;
+        } finally {
+            is.close();
         }
     }
 
-    public static void main(String[] args) {
+    public static void getJsonRequest() throws IOException, JSONException  {
 
-        try {
-            CaptureInfo.getJsonRequest();
-        } catch (JSONException ex) {
-            Logger.getLogger(CaptureInfo.class.getName()).log(Level.SEVERE, null, ex);
+                // Creacion y Construcción de array para enviar los datos a la base de datos...
+        java.util.ArrayList<String> arreglo = new java.util.ArrayList<>();
+        // Se obtiene token del usuario ingresado o x accion que realice en su eventualidad
+        //  JSONObject jsonUser = readJsonFromUrl("http://18.235.152.56/login?student_code=1151651&password=hola");
+        // Se obtiene token accediendo a la posicion del objecto api_token
+        //JSONArray objectToken = jsonUser.getJSONArray("api_token");
+        // Nuevamente se consume para acceder a la data...
+        JSONObject json = readJsonFromUrl("http://18.235.152.56/students?api_token=" + "ajo8IzTFPGgmPalA6u14DON4K7X6mHvFvs9x1gLJEZChSAWAfzWu8jklVK5iJ1GmfomJEXaO9mrue7rCbThEKQgHKLVm5pncez04lme1T43pLw66Px5kGv3ueXyQYqUNOi4JCvBrFeIo6iP71aosu7");
+        // Obtenemos los objetos correspondiente a la aduitoria.
+        JSONArray objectData = json.getJSONArray("data");
+        // Recorremos Los objetos de acuerdo a la longitud de lo consumido para el microservicio de auditoria
+        for (int iterator = 0; iterator < objectData.length(); iterator++) {
+            System.out.println(
+                    "Fecha Creacion " + json.getJSONArray("data").toJSONObject(objectData).toJSONArray(objectData).getJSONObject(iterator).get("created_at")
+                    + " Fecha Actualizacion " + json.getJSONArray("data").toJSONObject(objectData).toJSONArray(objectData).getJSONObject(iterator).get("updated_at")
+                    + " Descripcion " + json.getJSONArray("data").toJSONObject(objectData).toJSONArray(objectData).getJSONObject(iterator).get("email"));
+            // Añadimos los obtenido en un ArrayList
+            //    arreglo.add((String)json.getJSONArray("data").toJSONObject(objectData).toJSONArray(objectData).getJSONObject(iterator).get("created_at"));
         }
 
+        // Los parametros que se debe recibir son: String user, String action, String module, String description es decir...
+        // new ServiceAuditoriums().insertAudit(arreglo.get(0), arreglo.get(1), arreglo.get(2), arreglo.get(3));
+        // Finaliza el proceso de consumo para el microservicio aditoria...
+        
     }
 }
