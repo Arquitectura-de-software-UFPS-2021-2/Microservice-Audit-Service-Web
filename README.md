@@ -8,15 +8,15 @@ El Microservicio se utiliza para la gestión de auditoría de los eventos realiz
 
 ## Registro de acciones de usuarios.
 - Un usuario Auditor puedo gestionar las acciones del usuario.
-1. Realizar seguimiento de todas las modificaciones como creación, renombrado o borrado sobre los archivos publicados.
-2. Listar las acciones realizadas por cada usuario.
-3. Un auditor podrá ver el listado de las acciones realizadas sobre algún archivo.
-4. Debe permitir al auditor filtrar los registros existentes.
-5. Eliminar auditoría de un objeto determinado.
 
 ## Generar reporte de auditoría
 - Un usuario Auditor puedo generar reportes de la auditoría.
-1. Un auditor podrá generar informes.  
-2. Evaluación de procesos y cumplimiento de estándares.
-3. Señalar excepciones y destacar áreas que requieren atención.
-4. Localizar errores y posibles irregularidades.
+
+## Actualizar plan de auditoría
+- Usuario Auditor puedo actualizar continuamente el plan de auditoría.
+
+## Definir plan de auditoría
+- Usuario Auditor puedo definir el plan de auditoría.
+
+## Mostrar información historica de auditorias anteriores
+- Usuario Auditor puedo consultar la información historica de auditorias anteriores.
