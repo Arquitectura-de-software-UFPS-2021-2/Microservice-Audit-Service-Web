@@ -24,7 +24,7 @@ El Microservicio se utiliza para la gestión de auditoría de los eventos realiz
 ## Instalación  💻
 Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y procedemos a Clonar el Proyecto, para ello ingresaremos el siguiente comando: 
   ```
-  git clone https://github.com/Arquitectura-de-software-UFPS-2021-2/Microservice-Audit-Service.git
+  git clone https://github.com/Arquitectura-de-software-UFPS-2021-2/Microservice-Audit-Service-Web.git
   ```
 ## Pre-Requisito
 - Tener instalado un IDE, ya sea Netbeans, Eclipse o Visual Studio.
