@@ -33,6 +33,6 @@ Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y
 ## Pasos para la configuración
 
 ## Iniciar la aplicación
-Asegurarse de tener
-Java 11 
-Tomcat 
+Asegurarse de tener instalado
+- Java  
+- Tomcat 
