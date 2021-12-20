@@ -20,3 +20,19 @@ El Microservicio se utiliza para la gestión de auditoría de los eventos realiz
 
 ## Mostrar información historica de auditorias anteriores
 - Usuario Auditor puedo consultar la información historica de auditorias anteriores.
+
+## Instalación  💻
+Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y procedemos a Clonar el Proyecto, para ello ingresaremos el siguiente comando: 
+  ```
+  git clone https://github.com/Arquitectura-de-software-UFPS-2021-2/Microservice-Audit-Service.git
+  ```
+## Pre-Requisito
+- Tener instalado un IDE, ya sea Netbeans, Eclipse o Visual Studio.
+- Tener instalado el gestor de base de datos MySql 
+
+## Pasos para la configuración
+
+## Iniciar la aplicación
+Asegurarse de tener
+Java 11 
+Tomcat 
