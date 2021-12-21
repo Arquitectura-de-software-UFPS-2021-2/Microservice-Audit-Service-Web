@@ -42,3 +42,4 @@ Lo Primero que debemos hacer es abrir la consola (Terminal) de nuestro equipo, y
 Asegurarse de tener instalado
 - Java  
 - Tomcat 
+
